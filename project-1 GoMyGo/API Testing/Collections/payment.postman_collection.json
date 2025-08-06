@@ -1,0 +1,44 @@
+{
+	"info": {
+		"_postman_id": "06a843ab-c765-48c9-82c0-b91e878f424e",
+		"name": "payment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40677215",
+		"_collection_link": "https://kushfintech-qa.postman.co/workspace/GoMyGo~4a000e07-d272-44d8-93d6-74d93d0481d0/collection/40677215-06a843ab-c765-48c9-82c0-b91e878f424e?action=share&source=collection_link&creator=40677215"
+	},
+	"item": [
+		{
+			"name": "https://gatewaysandbox.nepalpayment.com/Payment/Index",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"MerchantId\": \"7470\",\r\n \"MerchantName\": \"gomygo\",\r\n   \"MerchantTxnId\": \"686cef23db826bd7ac0623f9-1751969574691\",\r\n   \"Amount\": 2500,\r\n   \"TransactionRemarks\": \"\",\r\n   \"InstrumentCode\": \"NABILCARD\",\r\n  \"ProcessId\": \"8C1E3E7C_2AF0_4D34_ACD3_04D1F5987EC7\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gatewaysandbox.nepalpayment.com/Payment/Index",
+					"protocol": "https",
+					"host": [
+						"gatewaysandbox",
+						"nepalpayment",
+						"com"
+					],
+					"path": [
+						"Payment",
+						"Index"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
