@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout repository
+      # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Setup Node.js
+      # Step 2: Setup Node.js (required for Newman)
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -25,11 +25,10 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
-      # Step 4: Run Postman Collection
+      # Step 4: Run Postman collection using local JSON files
       - name: Run Postman Collection
-        env:
-          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
         run: |
-          newman run https://api.getpostman.com/collections/46760181-4f35e701-e62c-4f4d-ba2c-500bbd7e71f5 \
-            -e https://api.getpostman.com/environments/46760181-743624c6-77e7-4aa6-a944-d4ce8d63645f \
-            -k $POSTMAN_API_KEY
+          newman run project-1\ GoMyGo/postman/collection.json \
+            -e project-1\ GoMyGo/postman/environment.json \
+            --reporters cli,junit \
+            --reporter-junit-export newman-results.xml
