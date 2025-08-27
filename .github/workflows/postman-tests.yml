@@ -11,25 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Setup Node.js (required for npm)
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'  # LTS version
-
-      # Step 3: Install Postman CLI
-      - name: Install Postman CLI
-        run: npm install -g postman-cli
-
-      # Step 4: Run Postman Collection from Postman Cloud
       - name: Run Postman Collection
-        env:
-          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
-        run: |
-          postman collection run 46760181-4f35e701-e62c-4f4d-ba2c-500bbd7e71f5 \
-            -k $POSTMAN_API_KEY \
-            --environment 46760181-743624c6-77e7-4aa6-a944-d4ce8d63645f
+        uses: postman/newman-action@v4.1.5
+        with:
+          collection: '46760181-4f35e701-e62c-4f4d-ba2c-500bbd7e71f5'
+          environment: '46760181-743624c6-77e7-4aa6-a944-d4ce8d63645f'
+          apiKey: ${{ secrets.POSTMAN_API_KEY }}
