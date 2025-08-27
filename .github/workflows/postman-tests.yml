@@ -1,0 +1,27 @@
+name: Run Postman Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  postman-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Install Postman CLI
+      - name: Install Postman CLI
+        run: npm install -g postman-cli
+
+      # Step 3: Run Postman collection from Postman Cloud
+      - name: Run Postman Collection
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: |
+          postman collection run 46760181-4f35e701-e62c-4f4d-ba2c-500bbd7e71f5 -k $POSTMAN_API_KEY --environment 46760181-743624c6-77e7-4aa6-a944-d4ce8d63645f
