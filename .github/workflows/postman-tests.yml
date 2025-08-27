@@ -11,12 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run Postman Collection
-        uses: postman/newman-action@v4.1.5
+      # Step 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          collection: '46760181-4f35e701-e62c-4f4d-ba2c-500bbd7e71f5'
-          environment: '46760181-743624c6-77e7-4aa6-a944-d4ce8d63645f'
-          apiKey: ${{ secrets.POSTMAN_API_KEY }}
+          node-version: '20'
+
+      # Step 3: Install Newman (Postman CLI)
+      - name: Install Newman
+        run: npm install -g newman
+
+      # Step 4: Run Postman Collection
+      - name: Run Postman Collection
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+        run: |
+          newman run https://api.getpostman.com/collections/46760181-4f35e701-e62c-4f4d-ba2c-500bbd7e71f5 \
+            -e https://api.getpostman.com/environments/46760181-743624c6-77e7-4aa6-a944-d4ce8d63645f \
+            -k $POSTMAN_API_KEY
