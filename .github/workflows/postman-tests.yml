@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
+      # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -25,10 +25,10 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
-      # Step 4: Run Postman collection using local JSON files
+      # Step 4: Run Postman Collection using local JSON files
       - name: Run Postman Collection
         run: |
-          newman run project-1\ GoMyGo/postman/collection.json \
-            -e project-1\ GoMyGo/postman/environment.json \
+          newman run "project-1 GoMyGo/postman/Booking Automation.postman_collection.json" \
+            -e "project-1 GoMyGo/postman/GoMyGoV2Staging.postman_environment.json" \
             --reporters cli,junit \
             --reporter-junit-export newman-results.xml
